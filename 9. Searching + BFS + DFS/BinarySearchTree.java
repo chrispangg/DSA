@@ -171,7 +171,8 @@ public class BinarySearchTree {
     }
 
     public ArrayList<BinaryTreeNode> breadthFirstSearchRecursive(ArrayList<BinaryTreeNode> queue) {
-        if (queue.isEmpty()) return queue;
+        if (queue.isEmpty())
+            return queue;
 
         BinaryTreeNode currentNode = queue.remove(0);
         System.out.print(currentNode.data + " ");
@@ -183,28 +184,81 @@ public class BinarySearchTree {
         }
         breadthFirstSearchRecursive(queue);
 
-        // prints 9 4 20 6 15 170, which is in the order of BFS
+        // prints 9 4 20 1 6 15 170, which is in the order of BFS
         return queue;
+    }
+
+    // DFS is usually implemented with Recursion
+    public ArrayList<BinaryTreeNode> depthFirstSearchPreorder(BinaryTreeNode node, ArrayList<BinaryTreeNode> list) {
+        list.add(node);
+        System.out.print(node.data + ", ");
+        
+        if (node.left != null) {
+            depthFirstSearchPreorder(node.left, list);
+        }
+        if (node.right != null) {
+            depthFirstSearchPreorder(node.right, list);
+        }
+
+        return list;
+    }
+
+    public ArrayList<BinaryTreeNode> depthFirstSearchInorder(BinaryTreeNode node, ArrayList<BinaryTreeNode> list) {
+        if (node.left != null) {
+            depthFirstSearchInorder(node.left, list);
+        }
+        // with Inorder we add node
+        list.add(node);
+        System.out.print(node.data + ", ");
+
+
+        if (node.right != null) {
+            depthFirstSearchInorder(node.right, list);
+        }
+        return list;
+    }
+
+    public ArrayList<BinaryTreeNode> depthFirstSearchPostorder(BinaryTreeNode node, ArrayList<BinaryTreeNode> list) {
+        if (node.left != null) {
+            depthFirstSearchPostorder(node.left, list);
+        }
+        if (node.right != null) {
+            depthFirstSearchPostorder(node.right, list);
+        }
+
+        list.add(node);
+        System.out.print(node.data + ", ");
+
+        return list;
     }
 
     public static void main(String[] args) {
         BinarySearchTree t = new BinarySearchTree();
+
         t.insert(9);
         t.insert(4);
         t.insert(6);
         t.insert(20);
         t.insert(170);
         t.insert(15);
-
+        t.insert(1);
+        
         // t.breadthFirstSearch();
 
         ArrayList<BinaryTreeNode> queue = new ArrayList<BinaryTreeNode>();
         BinaryTreeNode rootNode = t.root;
-        queue.add(rootNode);
-        t.breadthFirstSearchRecursive(queue);
+        // queue.add(rootNode);
+        // t.breadthFirstSearchRecursive(queue);
 
         // StringBuilder sb = new StringBuilder();
         // System.out.println(printTree(t.root, sb));
+
+
+        t.depthFirstSearchPreorder(rootNode, queue);
+        System.out.println(" ");
+        t.depthFirstSearchInorder(rootNode, queue);
+        System.out.println(" ");
+        t.depthFirstSearchPostorder(rootNode, queue);
 
         // 9
         // 4 20
