@@ -1,7 +1,6 @@
 import java.util.Hashtable;
-import java.util.LinkedList;
 
-public class Memoization1 {
+public class Memoization {
     Hashtable<Integer, Integer> cache;
 
     public int addTo100(int n){
@@ -21,7 +20,7 @@ public class Memoization1 {
     }
 
     public static void main(String[] args) {
-        Memoization1 m = new Memoization1();
+        Memoization m = new Memoization();
         m.cache = new Hashtable<Integer, Integer>();
         m.memoizedAddTo100(20);
         m.memoizedAddTo100(20);
